@@ -7,7 +7,8 @@
 // in contrast to 'grunt server', that serves data
 // from /app (unprocessed) to port 9000 with live reload.
 //
-var express = require('express');
+var express = require('express'),
+    Notes = require('./lib/notes.js');
 
 var port = process.env.PORT || 5000;
 var BASE = '/dist';
@@ -34,4 +35,5 @@ app.get('/', function(request, response) {
 
 app.listen(port, function() {
   console.log('Listening on ' + port);
+  console.log('See jshint, I used it: ', new Notes());
 });
