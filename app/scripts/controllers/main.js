@@ -9,4 +9,8 @@ angular.module('angularApp')
   .controller('NotesDetailCtl', function ($scope, notesService, $routeParams) {
     $scope.id = $routeParams.id;
     $scope.data = notesService.get($scope.id);
+
+    $scope.save = function() {
+      notesService.put($scope.id, $scope.data);
+    };
   });

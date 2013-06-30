@@ -25,11 +25,14 @@ notesModule.factory('notesService', function() {
     return repo[id];
   };
 
-  // TODO: add create/read/update/delete
+  var put = function(id, data) {
+    repo[id] = data;
+  };
 
   var notes = {
     keys: keys,
-    get: get
+    get: get,
+    put: put
   };
 
   return notes;
