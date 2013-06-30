@@ -8,7 +8,8 @@
 // from /app (unprocessed) to port 9000 with live reload.
 //
 var express = require('express'),
-    Notes = require('./lib/notes.js');
+    Notes = require('./lib/notes.js'),
+    notes = new Notes();
 
 var port = process.env.PORT || 5000;
 var BASE = '/dist';
@@ -29,11 +30,22 @@ app.configure(function(){
   app.use(app.router);
 });
 
-app.get('/', function(request, response) {
-  response.render('index.html');
+app.get('/', function(req, res) {
+  res.render('index.html');
+});
+
+app.get('/svc/notes', function(req, res) {
+  res.json(notes.keys());
+});
+
+app.get('/svc/notes/:id', function(req, res) {
+  res.json(notes.get(req.params.id));
+});
+
+app.put('/svc/notes/:id', function(req, res) {
+  res.json(notes.put(req.params.id, req.params.data));
 });
 
 app.listen(port, function() {
   console.log('Listening on ' + port);
-  console.log('See jshint, I used it: ', new Notes());
 });
