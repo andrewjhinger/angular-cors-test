@@ -1,3 +1,4 @@
+'use strict';
 //
 // notes service, in-memory version
 //
@@ -18,7 +19,7 @@ notesModule.factory('notesService', function() {
       }
     }
     return keys;
-  }
+  };
 
   // TODO: add create/read/update/delete
 

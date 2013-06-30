@@ -3,11 +3,15 @@
 angular.module('angularApp', ['notesModule'])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/notes', {
+        templateUrl: 'views/notesList.html',
+        controller: 'NotesListCtl'
+      })
+      .when('/notes/:id', {
+        templateUrl: 'views/notesDetail.html',
+        controller: 'NotesDetailCtl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/notes'
       });
   });
