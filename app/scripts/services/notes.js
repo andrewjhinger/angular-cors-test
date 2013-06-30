@@ -21,10 +21,15 @@ notesModule.factory('notesService', function() {
     return keys;
   };
 
+  var get = function(id) {
+    return repo[id];
+  };
+
   // TODO: add create/read/update/delete
 
   var notes = {
-    keys: keys
+    keys: keys,
+    get: get
   };
 
   return notes;
