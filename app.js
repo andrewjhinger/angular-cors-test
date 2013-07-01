@@ -27,7 +27,6 @@ app.configure(function(){
   app.use(express.bodyParser());
   // serve static data from here
   app.use(express.static(__dirname + BASE));
-  app.use(app.router);
 });
 
 app.get('/', function(req, res) {
@@ -42,8 +41,10 @@ app.get('/svc/notes/:id', function(req, res) {
   res.json(notes.get(req.params.id));
 });
 
-app.put('/svc/notes/:id', function(req, res) {
-  res.json(notes.put(req.params.id, req.params.data));
+app.post('/svc/notes/:id', function(req, res) {
+  // angularjs prefers POST to PUT for save().
+  // hmm, :id is redundant with :id in body.
+  res.json(notes.put(req.body));
 });
 
 app.listen(port, function() {

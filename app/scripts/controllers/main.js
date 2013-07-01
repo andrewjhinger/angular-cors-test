@@ -5,12 +5,12 @@ angular.module('angularApp')
     $scope.keys = notesService.keys();
   });
 
+
 angular.module('angularApp')
   .controller('NotesDetailCtl', function ($scope, notesService, $routeParams, $location) {
-    $scope.id = $routeParams.id;
-    $scope.data = notesService.get($scope.id);
+    $scope.note = notesService.get($routeParams.id);
     $scope.save = function() {
-      notesService.put($scope.id, $scope.data);
+      notesService.put($scope.note);
       $location.path('/notes');
     };
   });

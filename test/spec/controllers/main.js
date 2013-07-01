@@ -7,7 +7,7 @@ describe('Controller: NotesListCtl', function () {
 
   var dummyNotesService = {
     keys: function() {
-      return ['aap', 'noot' ];
+      return [{'id':'aap'}, {'id':'noot'}];
     }
   };
 
