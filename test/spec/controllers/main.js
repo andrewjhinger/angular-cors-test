@@ -3,7 +3,7 @@
 describe('Controller: NotesListCtl', function () {
 
   // load the controller's module
-  beforeEach(module('angularApp'));
+  beforeEach(module('angularApp', 'ngResource'));
 
   var dummyNotesService = {
     keys: function() {

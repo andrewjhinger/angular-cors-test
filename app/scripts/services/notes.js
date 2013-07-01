@@ -2,7 +2,7 @@
 //
 // notes service, in-memory version
 //
-var notesModule = angular.module('notesModule', []);
+var notesModule = angular.module('notesModule', ['ngResource']);
 notesModule.factory('notesService', function() {
 
   var repo = {
