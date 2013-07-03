@@ -12,7 +12,7 @@ var express = require('express'),
     notes = new Notes();
 
 var port = process.env.PORT || 5000;
-var BASE = '/dist';
+var BASE = '/app';
  
 var app = express();
 
@@ -33,19 +33,26 @@ app.get('/', function(req, res) {
   res.render('index.html');
 });
 
-app.get('/svc/notes', function(req, res) {
+var addCorsHeader = function(middleware) {
+  return function(req, res) {
+    res.set('Access-Control-Allow-Origin', 'http://localhost:5000');
+    return middleware(req,res);
+  };
+};
+
+app.get('/svc/notes', addCorsHeader(function(req, res) {
   res.json(notes.keys());
-});
+}));
 
-app.get('/svc/notes/:id', function(req, res) {
+app.get('/svc/notes/:id', addCorsHeader(function(req, res) {
   res.json(notes.get(req.params.id));
-});
+}));
 
-app.post('/svc/notes/:id', function(req, res) {
+app.post('/svc/notes/:id', addCorsHeader(function(req, res) {
   // angularjs prefers POST to PUT for save().
   // hmm, :id is redundant with :id in body.
   res.json(notes.put(req.body));
-});
+}));
 
 app.listen(port, function() {
   console.log('Listening on ' + port);
