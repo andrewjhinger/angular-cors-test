@@ -119,6 +119,7 @@ module.exports = function (grunt) {
         'backend.js',
         'lib/**/*.js'
       ]
+      // TODO: tell jshint about jasmine files and variables
     },
     coffee: {
       dist: {
@@ -277,9 +278,23 @@ module.exports = function (grunt) {
       ]
     },
     karma: {
+      // client testing`
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      }
+    },
+    'jasmine_node': {
+      // server testing
+      projectRoot: false,
+      specFolder: './specs',
+      requirejs: false,
+      forceExit: true,
+      jUnit: {
+        report: false,
+        savePath : './build/reports/jasmine/',
+        useDotNotation: true,
+        consolidate: true
       }
     },
     cdnify: {
@@ -323,6 +338,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'jasmine_node',
     'clean:server',
     'concurrent:test',
     'connect:test',
