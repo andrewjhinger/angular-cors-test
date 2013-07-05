@@ -13,10 +13,24 @@ var port = process.env.PORT || 6321;
  
 var app = express();
 
+var ALLOWED_HEADERS = [
+  'X-Requested-With',
+  'Content-Type'
+];
+
+var ALLOWED_HOSTS = {
+  'http://localhost:5000': 1,
+  'http://localhost:9000': 1
+};
+
 
 var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5000');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  var origin = req.headers.origin;
+  if (ALLOWED_HOSTS[origin]) {
+    // can't return a list
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Headers', ALLOWED_HEADERS.join());
+  }
   next();
 };
 
@@ -33,8 +47,6 @@ app.configure(function(){
 
 
 app.options('*', function(req, res) {
-  // res.header('Access-Control-Allow-Origin', 'http://localhost:5000');
-  ////  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   res.end();
 });
 
