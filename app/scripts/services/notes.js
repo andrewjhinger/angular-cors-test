@@ -5,7 +5,8 @@
 var notesModule = angular.module('notesModule', ['ngResource']);
 notesModule.factory('notesService', [ '$resource', function($resource) {
 
-  var Notes = $resource('/svc/notes/:noteId', {noteId: '@id'});
+  // angular bug: https://github.com/angular/angular.js/issues/1243
+  var Notes = $resource('http://localhost\\:6321/svc/notes/:noteId', {noteId: '@id'});
 
   var keys = function() {
     //
