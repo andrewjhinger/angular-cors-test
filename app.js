@@ -12,7 +12,7 @@
 var express = require('express');
 
 var port = process.env.PORT || 5000;
-var BASE = '/app';
+var BASE = '/dist';
  
 var app = express();
 
