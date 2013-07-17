@@ -297,6 +297,18 @@ module.exports = function (grunt) {
         consolidate: true
       }
     },
+
+    mochaTest: {
+      // server testing with mocha
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['specs/**/*.spec.js']
+      }
+    },
+
+
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']

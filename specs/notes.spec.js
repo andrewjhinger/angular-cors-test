@@ -1,8 +1,6 @@
-var Notes = require('../lib/notes')
-//
-// test for the server part.
-// written in node-jasmine, for now the default for yeoman.
-//
+var Notes = require('../lib/notes'),
+    expect = require('chai').expect;
+
 describe('notes', function() {
   it('should have constructor', function() {
     var notes = new Notes();
@@ -10,13 +8,13 @@ describe('notes', function() {
 
   it('should come with predefined notes', function() {
     var notes = new Notes();
-    expect(notes.keys().length).toBe(3);
+    expect(notes.keys().length).to.equal(3);
   });
 
   it('should have note aap', function() {
     var notes = new Notes();
     var note = notes.get('aap');
-    expect(note.id).toBe('aap');
-    expect(note.data).toMatch(/gouden ring/);
+    expect(note.id).to.equal('aap');
+    expect(note.data).to.match(/gouden ring/);
   });
 });
