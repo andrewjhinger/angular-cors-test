@@ -1,12 +1,4 @@
 // Generated on 2013-06-29 using generator-angular 0.3.0
-//
-// targets:
-// [default]: test and build optimized version
-// test: client and server test suite
-// server: run angular app directly from source dir, does not start backend
-// jshint: search for style errors
-//
-//
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
