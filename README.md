@@ -19,6 +19,8 @@ Running it
  * run 'npm install' to download dependencies written in node
  * run 'npm install -g grunt-cli' to make the grunt build tool globally
    available
+ * run 'npm install -g bower' to make manager for client packages globally available
+ * run 'bower install' to download client-side javascript
  * run 'grunt build' to test and build an optimized version of the app
  * run 'node backend.js' to start the backend
  * run 'node app.js' to start the frontend
