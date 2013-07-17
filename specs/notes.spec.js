@@ -1,9 +1,10 @@
+'use strict';
 var Notes = require('../lib/notes'),
     expect = require('chai').expect;
 
 describe('notes', function() {
-  it('should have constructor', function() {
-    var notes = new Notes();
+  it('should have a constructor', function() {
+    new Notes();
   });
 
   it('should come with predefined notes', function() {

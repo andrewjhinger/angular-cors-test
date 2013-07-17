@@ -1,4 +1,12 @@
 // Generated on 2013-06-29 using generator-angular 0.3.0
+//
+// targets:
+// [default]: test and build optimized version
+// test: client and server test suite
+// server: run angular app directly from source dir, does not start backend
+// jshint: search for style errors
+//
+//
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
@@ -110,16 +118,68 @@ module.exports = function (grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        esnext: true,
+        bitwise: true,
+        camelcase: true,
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        indent: 2,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        quotmark: 'single',
+        regexp: true,
+        undef: true,
+        unused: true,
+        strict: true,
+        trailing: true,
+        smarttabs: true,
       },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
-        'app.js',
-        'backend.js',
-        'lib/**/*.js'
-      ]
-      // TODO: tell jshint about jasmine files and variables
+      client: {
+        options: {
+          browser: true,
+          // use function form of 'use strict' is good advice,
+          // but breaks angular assumptions.
+          '-W097': true,
+          globals: {
+            angular: false
+          }
+        },
+        src: [
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+        ]
+      },
+      build: {
+        options: {
+          node: true,
+        },
+        src: [
+          'Gruntfile.js',
+        ]
+      },
+      server: {
+        options: {
+          node: true,
+        },
+        src: [
+          'app.js',
+          'backend.js',
+          'lib/**/*.js'
+        ]
+      },
+      mocha: {
+        options: {
+          node: true,
+          globals: {
+            'describe': false,
+            'it': false
+          }
+        },
+        src: [
+          'specs/**/*.js'
+        ]
+      }
     },
     coffee: {
       dist: {
@@ -284,20 +344,6 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-    'jasmine_node': {
-      // server testing
-      projectRoot: false,
-      specFolder: './specs',
-      requirejs: false,
-      forceExit: true,
-      jUnit: {
-        report: false,
-        savePath : './build/reports/jasmine/',
-        useDotNotation: true,
-        consolidate: true
-      }
-    },
-
     mochaTest: {
       // server testing with mocha
       test: {
@@ -307,8 +353,6 @@ module.exports = function (grunt) {
         src: ['specs/**/*.spec.js']
       }
     },
-
-
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
@@ -340,6 +384,11 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
     }
 
+    //
+    // this runs the frontend, not the json backend.
+    // the livereload task monitors the angular scripts
+    // and reloads on change.
+    //
     grunt.task.run([
       'clean:server',
       'concurrent:server',
@@ -350,7 +399,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'jasmine_node',
+    'mochaTest',
     'clean:server',
     'concurrent:test',
     'connect:test',

@@ -17,6 +17,7 @@
 // and verify response.
 // 
 //
+'use strict';
 var server = require('../lib/backapp'),
     request = require('supertest'),
     expect = require('chai').expect;
